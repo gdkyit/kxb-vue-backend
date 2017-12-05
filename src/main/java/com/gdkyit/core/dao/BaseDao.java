@@ -17,9 +17,5 @@ public class BaseDao {
     @Autowired
     NamedParameterJdbcTemplate npJdbcTemplate;
 
-    public List<Map<String,Object>> getDblist() {
-        String sql = "select * from seed_users";
 
-        return this.jdbcTemplate.queryForList(sql);
-    }
 }
