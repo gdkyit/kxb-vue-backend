@@ -18,6 +18,10 @@ public class PubController {
     @Autowired
     private BaseService baseService;
 
+    /**
+     * 
+     * @return
+     */
     @GetMapping("/api/info")
     public Result getInfo(){
         Map<String,Object> rs = new HashMap<>();
