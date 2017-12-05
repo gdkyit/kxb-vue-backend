@@ -19,7 +19,7 @@ public class PubController {
     private BaseService baseService;
 
     /**
-     * 
+     *
      * @return
      */
     @GetMapping("/api/info")
