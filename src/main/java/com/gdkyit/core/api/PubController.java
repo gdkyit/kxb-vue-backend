@@ -1,7 +1,7 @@
 package com.gdkyit.core.api;
 
 import com.gdkyit.core.domain.Result;
-import com.gdkyit.core.service.BaseService;
+import com.gdkyit.core.service.BaseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class PubController {
     String env;
 
     @Autowired
-    private BaseService baseService;
+    private BaseInfoService baseService;
 
     @GetMapping("/api/info")
     public Result getInfo(){

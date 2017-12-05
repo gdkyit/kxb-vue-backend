@@ -1,6 +1,7 @@
 package com.gdkyit.core.service;
 
 import com.gdkyit.core.dao.BaseDao;
+import com.gdkyit.core.dao.BaseInfoDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,10 +11,10 @@ import java.util.Map;
 
 @Transactional
 @Service
-public class BaseService {
+public class BaseInfoService {
 
     @Resource
-    private BaseDao basedao;
+    private BaseInfoDao basedao;
 
     public List<Map<String, Object>> getDblist() {
         return basedao.getDblist();
