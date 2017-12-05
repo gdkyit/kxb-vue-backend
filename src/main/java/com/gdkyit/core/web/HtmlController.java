@@ -10,7 +10,7 @@ public class HtmlController {
     @RequestMapping("/example")
     public String getIndex(ModelMap map) {
         // 加入一个属性，用来在模板中读取
-        map.addAttribute("host", "co222m");
+        map.addAttribute("host", "co2288882m");
         // return模板文件的名称，对应src/main/resources/templates/example.html
         return "example";
     }
