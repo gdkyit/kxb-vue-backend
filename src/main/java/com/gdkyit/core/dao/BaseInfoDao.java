@@ -10,7 +10,6 @@ public class BaseInfoDao extends BaseDao {
 
     public List<Map<String,Object>> getDblist() {
         String sql = "select * from seed_users";
-
         return this.jdbcTemplate.queryForList(sql);
     }
 }
