@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +26,11 @@ public class UserService {
         userDao.deleteById(id);
     }
 
-    public void alert(Integer id,Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone, Timestamp createTime){
-        userDao.alert(id,version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone,createTime);
+    public void alert(Integer id,Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone){
+        userDao.alert(id,version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone);
     }
 
-    public void add(Integer id,Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone, Timestamp createTime){
-        userDao.add(id,version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone,createTime);
+    public void add(Integer id,Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone){
+        userDao.add(id,version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone);
     }
 }

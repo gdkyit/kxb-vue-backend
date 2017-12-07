@@ -5,7 +5,6 @@ import com.gdkyit.core.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ public class UserController {
      */
     @PostMapping("/add")
     public Result add(@RequestBody Map<String,Object> params){
-        userService.add((Integer) params.get("id"),(Integer) params.get("version"),(String) params.get("username"),(String)params.get("password"),(Integer)params.get("accountEnable"),(Integer) params.get("accountExpired"),(Integer) params.get("accountLocked"),(Integer)params.get("credentialsExpired"),(String)params.get("names"),(String) params.get("phone"),(Timestamp) params.get("createTime"));
+        userService.add((Integer) params.get("id"),(Integer) params.get("version"),(String) params.get("username"),(String)params.get("password"),(Integer)params.get("accountEnable"),(Integer) params.get("accountExpired"),(Integer) params.get("accountLocked"),(Integer)params.get("credentialsExpired"),(String)params.get("names"),(String) params.get("phone"));
         return Result.genSuccessResult();
     }
 
@@ -50,7 +49,7 @@ public class UserController {
      */
     @PutMapping("/alert/{id}")
     public Result alert(@PathVariable Integer id ,@RequestBody Map<String,Object> params){
-        userService.alert((Integer) params.get("id"),(Integer) params.get("version"),(String) params.get("username"),(String)params.get("password"),(Integer)params.get("accountEnable"),(Integer) params.get("accountExpired"),(Integer) params.get("accountLocked"),(Integer)params.get("credentialsExpired"),(String)params.get("names"),(String) params.get("phone"),(Timestamp) params.get("createTime"));
+        userService.alert((Integer) params.get("id"),(Integer) params.get("version"),(String) params.get("username"),(String)params.get("password"),(Integer)params.get("accountEnable"),(Integer) params.get("accountExpired"),(Integer) params.get("accountLocked"),(Integer)params.get("credentialsExpired"),(String)params.get("names"),(String) params.get("phone"));
         return Result.genSuccessResult();
     }
 
