@@ -23,22 +23,22 @@ public class RoleService {
         return roleDao.getRolebz(id);
     }
 
-    public Integer addRole(String name,String description,byte yxbz){
-        return roleDao.addRole(name,description,yxbz);
+    public Integer addRole(Map<String,Object> role){
+        return roleDao.addRole(role);
     }
 
     public int deleteRole(int id){
         return roleDao.deleteRole(id);
     }
 
-    //修改全部
-//    public Integer updateRole(int id,String name,String description,byte yxbz){
-//        return roleDao.updateRole(id, name, description, yxbz);
-//    }
+    //修改单个全部信息
+    public Integer updateRole(int id,Map<String,Object> role){
+        return roleDao.updateRole(id, role);
+    }
 
-    //修改标志
-    public Integer updateRole(int id,byte yxbz){
-        return roleDao.updateRole(id,yxbz);
+    //修改单个标志
+    public Integer updateYxbz(int id, Map<String, Object> yxbz){
+        return roleDao.updateYxbz(id,yxbz);
     }
 }
 

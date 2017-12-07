@@ -25,8 +25,8 @@ public class RoleController {
     }
 
     @PostMapping("api/role")
-    public Result addRole(String name,String description,byte yxbz){
-        return Result.genSuccessResult(roleService.addRole(name, description, yxbz));
+    public Result addRole(@RequestBody Map<String,Object> role){
+        return Result.genSuccessResult(roleService.addRole(role));
     }
 
     @DeleteMapping("api/role/{id}")
@@ -34,15 +34,15 @@ public class RoleController {
         return Result.genSuccessResult(roleService.deleteRole(id));
     }
 
-    //修改全部
-//    @PutMapping("api/role/{id}")
-//    public Result updateRole(@PathVariable int id,String name,String description,byte yxbz){
-//        return Result.genSuccessResult(roleService.updateRole(id, name, description, yxbz));
-//    }
-
-    //修改有效标志
+    //修改单个全部信息
     @PutMapping("api/role/{id}")
-    public Result updateRole(@PathVariable int id,byte yxbz){
-        return Result.genSuccessResult(roleService.updateRole(id,yxbz));
+    public Result updateRole(@PathVariable int id,@RequestBody Map<String,Object> role){
+        return Result.genSuccessResult(roleService.updateRole(id,role));
+    }
+
+    //修改单个有效标志
+    @PutMapping("api/roleyxbz/{id}")
+    public Result updateYxbz(@PathVariable int id,@RequestBody Map<String,Object> yxbz){
+        return Result.genSuccessResult(roleService.updateYxbz(id,yxbz));
     }
 }
