@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Title1212</title>
+    <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
 </head>
 <body>
 <h1 th:text="${host}">Hello World</h1>
-<p>8888</p>
+<a href="#" class="a">导出excel文件</a>
+<script type="text/javascript">
+    $(function () {
+        $(".a").click(function () {
+            //导出文件
+            $.ajax({
+                url: '/api/excel',
+                type: 'post',
+                contentType:'application/json;charset=utf-8',
+                data:JSON.stringify({
+                    name:["小明"],
+                    age:[10],
+                    date:["2017/10/10"]
+                }),
+                success: function (result) {
+
+                },
+                error: function (e) {
+                    alert("导出失败,请重试");
+                }
+            });
+
+        });
+    });
+</script>
 </body>
 </html>
