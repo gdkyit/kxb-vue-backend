@@ -6,29 +6,21 @@
     <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
 </head>
 <body>
-<h1 th:text="${host}">Hello World</h1>
-<a href="#" class="a">导出excel文件</a>
 <script type="text/javascript">
     $(function () {
-        $(".a").click(function () {
-            //导出文件
-            $.ajax({
-                url: '/api/excel',
-                type: 'post',
-                contentType:'application/json;charset=utf-8',
-                data:JSON.stringify({
-                    name:["小明"],
-                    age:[10],
-                    date:["2017/10/10"]
-                }),
-                success: function (result) {
-
-                },
-                error: function (e) {
-                    alert("导出失败,请重试");
-                }
-            });
-
+        $.ajax({
+            url: 'https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query=2018%E5%B9%B41%E6%9C%88&resource_id=6018',
+            type: 'GET',
+            async: false,
+            dataType: 'jsonp',
+            jsonp: 'cb',
+            jsonpCallback: 'jQuery1102009526197252905422_1513932542817',
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                console.log(e);
+            }
         });
     });
 </script>
