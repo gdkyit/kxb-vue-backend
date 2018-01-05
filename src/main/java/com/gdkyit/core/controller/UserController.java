@@ -31,7 +31,7 @@ public class UserController {
      */
     @PostMapping("/add")
     public Result add(@RequestBody Map<String,Object> params){
-        userService.add((Integer) params.get("id"),(Integer) params.get("version"),(String) params.get("username"),(String)params.get("password"),(Integer)params.get("accountEnable"),(Integer) params.get("accountExpired"),(Integer) params.get("accountLocked"),(Integer)params.get("credentialsExpired"),(String)params.get("names"),(String) params.get("phone"));
+        userService.add(params);
         return Result.genSuccessResult();
     }
 
@@ -49,8 +49,7 @@ public class UserController {
      */
     @PutMapping("/alert/{id}")
     public Result alert(@PathVariable Integer id ,@RequestBody Map<String,Object> params){
-        userService.alert((Integer) params.get("id"),(Integer) params.get("version"),(String) params.get("username"),(String)params.get("password"),(Integer)params.get("accountEnable"),(Integer) params.get("accountExpired"),(Integer) params.get("accountLocked"),(Integer)params.get("credentialsExpired"),(String)params.get("names"),(String) params.get("phone"));
+        userService.alert(params);
         return Result.genSuccessResult();
     }
-
 }

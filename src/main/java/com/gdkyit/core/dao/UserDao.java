@@ -24,15 +24,16 @@ public class UserDao extends BaseDao {
         jdbcTemplate.update("DELETE FROM kxb_users WHERE ID=?",new Object[]{id});
     }
 
-    public void alert(Integer id, Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone){
-        jdbcTemplate.update("UPDATE kxb_users " +
-                                " SET VERSION=?,USERNAME=?,PASSWORD=?,ACCOUNT_ENABLED=?,ACCOUNT_EXPIRED=?,ACCOUNT_LOCKED=?,CREDENTIALS_EXPIRED=?,NAMES=?,PHONE=? " +
-                                " WHERE ID=?",
-                                new Object[]{version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone,id});
+    public void alert(Map<String,Object> params){
+        StringBuffer stringBuffer = new StringBuffer("UPDATE kxb_users ");
+        stringBuffer.append("SET VERSION=?,USERNAME=?,PASSWORD=?,ACCOUNT_ENABLED=?,ACCOUNT_EXPIRED=?,ACCOUNT_LOCKED=?,CREDENTIALS_EXPIRED=?,NAMES=?,PHONE=? ");
+        stringBuffer.append("WHERE ID=?");
+        jdbcTemplate.update(stringBuffer.toString(),new Object[]{params.get("version"),params.get("username"),params.get("password"),params.get("accountEnable"),params.get("accountExpired"),params.get("accountLocked"),params.get("credentialsExpired"),params.get("names"),params.get("phone"),params.get("id")});
     }
 
-    public void add(Integer id,Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone){
-        jdbcTemplate.update("INSERT INTO kxb_users VALUES (?,?,?,?,?,?,?,?,?,?,?)",new Object[]{id,version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone,df.format(new Date())});
+    public void add(Map<String,Object> params){
+        String sql = "INSERT INTO kxb_users VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql,new Object[]{params.get("id"),params.get("version"),params.get("username"),params.get("password"),params.get("accountEnable"),params.get("accountExpired"),params.get("accountLocked"),params.get("credentialsExpired"),params.get("names"),params.get("phone"),df.format(new Date())});
     }
 
 

@@ -26,11 +26,11 @@ public class UserService {
         userDao.deleteById(id);
     }
 
-    public void alert(Integer id,Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone){
-        userDao.alert(id,version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone);
+    public void alert(Map<String,Object> params){
+        userDao.alert(params);
     }
 
-    public void add(Integer id,Integer version, String username, String password, Integer accountEnable, Integer accountExpired, Integer accountLocked, Integer credentialsExpired, String names, String phone){
-        userDao.add(id,version,username,password,accountEnable,accountExpired,accountLocked,credentialsExpired,names,phone);
+    public void add(Map<String,Object> params){
+        userDao.add(params);
     }
 }
