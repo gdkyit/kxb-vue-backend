@@ -1,4 +1,4 @@
-package com.gdkyit.core.controller;
+package com.gdkyit.core.api;
 
 import com.gdkyit.core.domain.Result;
 import com.gdkyit.core.service.UserService;
@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by Administrator on 2017/12/5 0005.
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
     @Resource
     UserService userService;
