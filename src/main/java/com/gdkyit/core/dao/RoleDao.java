@@ -17,9 +17,9 @@ public class RoleDao extends BaseDao {
         return this.jdbcTemplate.queryForList(sql);
     }
 
-    //查询单个角色标志
-    public List<Map<String,Object>> getRolebz(int id){
-        String sql = "select yxbz from kxb_role where id = ?";
+    //查询单个角色
+    public List<Map<String,Object>> getRole(int id){
+        String sql = "select * from kxb_role where id = ?";
         return this.jdbcTemplate.queryForList(sql,id);
     }
 
@@ -47,7 +47,8 @@ public class RoleDao extends BaseDao {
 
     //修改单个标志
     public int updateYxbz(int id, Map<String, Object> params){
-        String sql = "update kxb_role set yxbz=? where id=?";
+        String sql = "update kxb_r" +
+                "ole set yxbz=? where id=?";
         Byte yxbz = Byte.parseByte((String) params.get("yxbz"));
         return this.jdbcTemplate.update(sql,new Object[]{yxbz,id});
     }

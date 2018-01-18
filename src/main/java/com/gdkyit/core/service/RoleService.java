@@ -18,9 +18,9 @@ public class RoleService {
         return roleDao.getRoles();
     }
 
-    //查询单个角色标志
-    public List<Map<String,Object>> getRolebz(int id){
-        return roleDao.getRolebz(id);
+    //查询单个角色
+    public List<Map<String,Object>> getRole(int id){
+        return roleDao.getRole(id);
     }
 
     public Integer addRole(Map<String,Object> role){

@@ -18,10 +18,10 @@ public class RoleController {
         return Result.genSuccessResult(roleService.getRoles());
     }
 
-    //查询单个角色标志
+    //查询单个角色
     @GetMapping("api/role/{id}")
-    public Result getRolebz(@PathVariable int id){
-        return Result.genSuccessResult(roleService.getRolebz(id));
+    public Result getRole(@PathVariable int id){
+        return Result.genSuccessResult(roleService.getRole(id));
     }
 
     @PostMapping("api/role")
