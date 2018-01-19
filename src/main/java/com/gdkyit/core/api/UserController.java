@@ -1,4 +1,4 @@
-package com.gdkyit.core.controller;
+package com.gdkyit.core.api;
 
 import com.gdkyit.core.domain.Result;
 import com.gdkyit.core.service.UserService;
@@ -12,17 +12,26 @@ import java.util.Map;
  * Created by Administrator on 2017/12/5 0005.
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
     @Resource
     UserService userService;
 
     /**
-     * 获取所有用户
+     * 条件，分布查询
      */
-    @GetMapping("")
-    public Result getAll(){
-       List<Map<String,Object>> list = userService.getAll();
+    @PostMapping("")
+    public Result getAll(@RequestBody Map<String,Object> params){
+       List<Map<String,Object>> list = userService.getAll(params);
+       return Result.genSuccessResult(list);
+    }
+
+    /**
+     *  获取用户信息
+     */
+    @GetMapping("/userInfo/{id}")
+    public Result getUesrInfo(@PathVariable Integer id){
+        List<Map<String,Object>> list = userService.getUserInfoById(id);
         return Result.genSuccessResult(list);
     }
 
@@ -38,7 +47,7 @@ public class UserController {
     /**
      * 删除用户
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delet*e/{id}")
     public Result delete(@PathVariable Integer id ){
         userService.deleteById(id);
         return Result.genSuccessResult();
@@ -47,8 +56,8 @@ public class UserController {
     /**
      *修改用户
      */
-    @PutMapping("/alert/{id}")
-    public Result alert(@PathVariable Integer id ,@RequestBody Map<String,Object> params){
+    @PutMapping("/alert")
+    public Result alert(@RequestBody Map<String,Object> params){
         userService.alert(params);
         return Result.genSuccessResult();
     }

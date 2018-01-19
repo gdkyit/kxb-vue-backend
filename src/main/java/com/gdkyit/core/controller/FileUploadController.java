@@ -18,17 +18,17 @@ public class FileUploadController {
     /**
      * 单文件上传测试页面
      */
-    @GetMapping("fileupload")
+    @GetMapping("/fileupload")
     public String fileUploadIndex(){
-        return "/fileupload";
+        return "fileupload";
     }
 
     /**
      * 多文件上传测试页面
      */
-    @GetMapping("mulfileupload")
+    @GetMapping("/mulfileupload")
     public String mulfileUploadIndex(){
-        return "/mulfileupload";
+        return "mulfileupload";
     }
 
     /**

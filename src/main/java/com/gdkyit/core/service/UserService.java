@@ -17,11 +17,9 @@ public class UserService {
     @Resource
     UserDao userDao;
 
-    public List<Map<String,Object>> getAll(){
-        return userDao.getAll();
+    public List<Map<String,Object>> getAll(Map<String,Object> params){
+        return userDao.getAll(params);
     }
-
-
     public void deleteById(Integer id){
         userDao.deleteById(id);
     }
@@ -32,5 +30,9 @@ public class UserService {
 
     public void add(Map<String,Object> params){
         userDao.add(params);
+    }
+
+    public List<Map<String,Object>> getUserInfoById(Integer id) {
+        return userDao.getUserInfoById(id);
     }
 }
