@@ -3,7 +3,6 @@ package com.gdkyit.core.api;
 import com.gdkyit.core.dao.TokenDao;
 import com.gdkyit.core.dao.UserDao;
 import com.gdkyit.core.domain.TokenResult;
-import com.gdkyit.core.entity.Token;
 import com.gdkyit.core.entity.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -34,37 +33,26 @@ public class TokenController {
         final String password = (String)params.get("password");
         final TokenResult tokenResult = new TokenResult();
 
-        if (username == null || username.trim() == "") {
+        if (username == null || username.equals("")) {
             tokenResult.setFlag(false);
             tokenResult.setMsg("登录名不能为空");
         }
-        //appSecret is null
-        else if (password == null || password.trim() == "") {
+        else if (password == null || password.equals("")) {
             tokenResult.setFlag(false);
             tokenResult.setMsg("密码不能为空");
         }else {
-            User user = userDao.findOneByUsername(username);
-            if(user == null) {
-                tokenResult.setFlag(false);
-                tokenResult.setMsg(username + "不存在");
-            }else {
-                //检查数据库是有该用户的token
-                Token token =tokenDao.findOneByUsername(username);
-                if(token.getId() == null) {
-                    String newToken = createNewToken(username);
-
-                    //把新生成token放进数据库
-                    tokenDao.saveToken(username,newToken);
-
-                    tokenResult.setFlag(true);
-                    tokenResult.setMsg("成功");
-                    tokenResult.setToken(newToken);
+            try{
+                User user = userDao.findOneByUsername(username);
+                if(!password.equals(user.getPassword())){
+                    tokenResult.setFlag(false);
+                    tokenResult.setMsg("用户名或密码出错");
                 }else {
-                    tokenResult.setFlag(true);
-                    tokenResult.setMsg("成功");
-                    tokenResult.setToken(token.getTokenname());
-
+                    tokenResult.setToken(tokenDao.findOneByUsername(username).getTokenname());
                 }
+            }catch (Exception e){
+                tokenResult.setMsg(e.getMessage());
+                tokenResult.setFlag(false);
+                tokenResult.setMsg("用户名或密码出错");
             }
 
         }

@@ -11,6 +11,7 @@ import org.hibernate.service.spi.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.ServletException;
@@ -33,8 +36,20 @@ import java.util.List;
 /**
  * Spring MVC 配置
  */
+@EnableWebMvc
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
+
+    @Bean
+    public JwtTokenInterceptor getJwtInterceptor(){
+        return new JwtTokenInterceptor();
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(getJwtInterceptor());
+        super.addInterceptors(registry);
+    }
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);
     @Value("${spring.profiles.active}")

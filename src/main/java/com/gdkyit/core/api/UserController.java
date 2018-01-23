@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by Administrator on 2017/12/5 0005.
  */
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserController {
     @Resource
     UserService userService;
@@ -47,7 +47,7 @@ public class UserController {
     /**
      * 删除用户
      */
-    @DeleteMapping("/delet*e/{id}")
+    @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable Integer id ){
         userService.deleteById(id);
         return Result.genSuccessResult();

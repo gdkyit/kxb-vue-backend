@@ -1,11 +1,10 @@
 package com.gdkyit.core.dao;
 
 import com.gdkyit.core.entity.User;
-import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,7 +51,11 @@ public class UserDao extends BaseDao {
         args.add(PageSize);
 
 
-    List<Map<String,Object>> list = jdbcTemplate.queryForList(stringBuffer.toString(),args.toArray());
+        List<Map<String,Object>> list = jdbcTemplate.queryForList(stringBuffer.toString(),args.toArray());
+        /**
+         * 对 list 时间格式化
+         */
+        System.out.println(list.get(0).get("CREATE_TIME"));
         return list;
 
 }
@@ -81,21 +84,29 @@ public class UserDao extends BaseDao {
     }
 
     /**
+     * 当查询结果是一个对象时， 这种方法最好用。
      * 没有完整查询出一个User,只为应付Tokens所需
-     * @param username
      * @return
      */
     public User findOneByUsername(String username) {
-        final User user = new User();
-        jdbcTemplate.query("select * from kxb_users where username=?", new Object[]{username}, new RowCallbackHandler() {
-            @Override
-            public void processRow(ResultSet rs) throws SQLException {
-                user.setId(rs.getLong("ID"));
-                user.setUsername(rs.getString("USERNAME"));
-                user.setPassword(rs.getString("PASSWORD"));
-            }
-        });
+//        final User user = new User();
+//        jdbcTemplate.query("select * from kxb_users where username=?", new Object[]{username}, new RowCallbackHandler() {
+//            @Override
+//            public void processRow(ResultSet rs) throws SQLException {
+//                user.setId(rs.getLong("ID"));
+//                user.setUsername(rs.getString("USERNAME"));
+//                user.setPassword(rs.getString("PASSWORD"));
+//            }
+//        });
+        /**
+         * 使用jdbcTemplate.queryForObject
+         */
+        String sql = "select * from kxb_users where username=?";
+        RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
+        User user = jdbcTemplate.queryForObject(sql,rowMapper,new Object[]{username});
         return user;
     }
+
+
 
 }
