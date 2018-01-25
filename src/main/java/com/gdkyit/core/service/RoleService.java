@@ -14,31 +14,40 @@ public class RoleService {
     @Resource
     private RoleDao roleDao;
 
-    public List<Map<String,Object>> getRoles(){
-        return roleDao.getRoles();
+    public List<Map<String, Object>> getRoles(Integer page, Integer size) {
+        return roleDao.getRoles(page, size);
+    }
+
+    public Map<String, Object> count() {
+        return roleDao.count();
     }
 
     //查询单个角色
-    public List<Map<String,Object>> getRole(int id){
+    public List<Map<String, Object>> getRole(int id) {
         return roleDao.getRole(id);
     }
 
-    public Integer addRole(Map<String,Object> role){
+    public Integer addRole(Map<String, Object> role) {
         return roleDao.addRole(role);
     }
 
-    public int deleteRole(int id){
+    public int deleteRole(int id) {
         return roleDao.deleteRole(id);
     }
 
     //修改单个全部信息
-    public Integer updateRole(int id,Map<String,Object> role){
+    public Integer updateRole(int id, Map<String, Object> role) {
         return roleDao.updateRole(id, role);
     }
 
     //修改单个标志
-    public Integer updateYxbz(int id, Map<String, Object> yxbz){
-        return roleDao.updateYxbz(id,yxbz);
+//    public Integer updateYxbz(int id, Map<String, Object> yxbz){
+//        return roleDao.updateYxbz(id,yxbz);
+//    }
+
+    //查询条件
+    public List<Map<String, Object>> searchRole(Map<String, Object> searchrole) {
+        return roleDao.searchRole(searchrole);
     }
 }
 
