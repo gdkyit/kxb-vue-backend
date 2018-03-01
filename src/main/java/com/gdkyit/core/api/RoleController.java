@@ -53,4 +53,9 @@ public class RoleController {
         List<Map<String, Object>> list = roleService.searchRole(searchrole);
         return Result.genSuccessResult(list);
     }
+
+    @PostMapping("api/role/muldelete")
+    public Result muldeleteRole(@RequestBody Map<String,Object> mulIds){
+        return Result.genSuccessResult(roleService.muldeleteRole(mulIds));
+    }
 }

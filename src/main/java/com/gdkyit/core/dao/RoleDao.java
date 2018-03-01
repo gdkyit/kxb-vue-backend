@@ -1,9 +1,13 @@
 package com.gdkyit.core.dao;
 
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -73,5 +77,21 @@ public class RoleDao extends BaseDao {
             args.add(searchrole.get("yxbz"));
         }
         return this.jdbcTemplate.queryForList(new String(sql), args.toArray());
+    }
+
+    //批量删除
+    public int[] muldeleteRole(Map<String, Object> mulIds) {
+        String sql = "delete from kxb_role where id = ?";
+        final List<String> str = Arrays.asList(((String) mulIds.get("ids")).split(","));
+        return this.jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+               preparedStatement.setString(1,str.get(i));
+            }
+            @Override
+            public int getBatchSize() {
+                return str.size();
+            }
+        });
     }
 }

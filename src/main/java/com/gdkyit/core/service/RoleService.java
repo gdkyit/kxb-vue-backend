@@ -49,5 +49,10 @@ public class RoleService {
     public List<Map<String, Object>> searchRole(Map<String, Object> searchrole) {
         return roleDao.searchRole(searchrole);
     }
+
+    //批量删除
+    public int[] muldeleteRole(Map<String,Object> mulIds ){
+        return roleDao.muldeleteRole(mulIds);
+    }
 }
 
