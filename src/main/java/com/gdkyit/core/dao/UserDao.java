@@ -20,4 +20,6 @@ public interface UserDao {
     public List<Map<String,Object>> getUserInfoById(Integer id);
 
     public User findOneByUsername(String username);
+
+    void batchDelete(Map<String, Object> params);
 }

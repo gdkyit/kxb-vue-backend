@@ -35,4 +35,8 @@ public class UserService {
     public List<Map<String,Object>> getUserInfoById(Integer id) {
         return userDao.getUserInfoById(id);
     }
+
+    public void batchDelete(Map<String, Object> params) {
+        userDao.batchDelete(params);
+    }
 }

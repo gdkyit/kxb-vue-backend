@@ -4,11 +4,13 @@ import com.gdkyit.core.dao.BaseDao;
 import com.gdkyit.core.dao.UserDao;
 import com.gdkyit.core.entity.User;
 import com.gdkyit.core.utils.TimeConverterUtil;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -147,6 +149,30 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         RowMapper<User> rowMapper = new BeanPropertyRowMapper<>(User.class);
         User user = jdbcTemplate.queryForObject(sql, rowMapper, new Object[]{username});
         return user;
+    }
+
+    @Override
+    public void batchDelete(Map<String, Object> params) {
+        String ids = (String)params.get("ids");
+        final String[] idsArray = ids.split(",");
+//        final List<String> idsList = Arrays.asList(idsArray);
+        /*for(String i: idsArray) {
+            jdbcTemplate.update("DELETE FROM kxb_users WHERE ID=?", new Object[]{i});
+        }*/
+
+
+        jdbcTemplate.batchUpdate("DELETE FROM kxb_users WHERE ID=?", new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setString(1,idsArray[i]);
+            }
+
+            //这里指定批量删除的数量大小，坑
+            @Override
+            public int getBatchSize() {
+                return idsArray.length;
+            }
+        });
     }
 
 

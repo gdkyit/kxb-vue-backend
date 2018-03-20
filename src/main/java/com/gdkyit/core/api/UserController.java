@@ -52,6 +52,15 @@ public class UserController {
         userService.deleteById(id);
         return Result.genSuccessResult();
     }
+    /**
+     * 批量删除用户
+     */
+    @DeleteMapping("")
+    public Result deleteMany(@RequestBody Map<String,Object> params){
+        userService.batchDelete(params);
+        return Result.genSuccessResult();
+    }
+
 
     /**
      *修改用户
