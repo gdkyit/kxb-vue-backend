@@ -1,10 +1,12 @@
 package com.gdkyit.core.api;
 
 import com.gdkyit.core.domain.Result;
+import com.gdkyit.core.exceptions.ServiceException;
 import com.gdkyit.core.service.BaseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -30,9 +32,15 @@ public class PubController {
         return Result.genSuccessResult(rs);
     }
 
-    @GetMapping("/dblist")
+    @GetMapping("/api/dblist")
     public Result getDblist(){
         return Result.genSuccessResult(baseService.getDblist());
+    }
+
+    @GetMapping("/test/ex")
+    public Result test(@RequestParam(required = true, value = "q") String path) throws Exception {
+        System.out.println(path);
+        throw new ServiceException("running error");
     }
 
 
