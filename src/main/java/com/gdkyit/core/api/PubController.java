@@ -20,10 +20,6 @@ public class PubController {
     @Autowired
     private BaseInfoService baseService;
 
-    /**
-     *
-     * @return
-     */
     @GetMapping("/api/info")
     public Result getInfo(){
         Map<String,Object> rs = new HashMap<>();
