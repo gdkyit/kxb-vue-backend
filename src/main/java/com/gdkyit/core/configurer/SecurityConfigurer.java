@@ -16,14 +16,17 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 // All of Spring Security will ignore the requests
                 .antMatchers("/resources/**","/index.html")
-                .antMatchers(HttpMethod.POST, "/login");
+                .antMatchers(HttpMethod.POST, "/user/login");
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                // if Spring MVC is on classpath and no CorsConfigurationSource is provided,
+                // Spring Security will use CORS configuration provided to Spring MVC
+                .and().cors();
     }
 
     @Autowired

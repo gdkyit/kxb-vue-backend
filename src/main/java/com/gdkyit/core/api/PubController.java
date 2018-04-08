@@ -5,10 +5,9 @@ import com.gdkyit.core.exceptions.ServiceException;
 import com.gdkyit.core.service.BaseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +37,10 @@ public class PubController {
         System.out.println(path);
         throw new ServiceException("running error");
     }
-
-
+    @PostMapping("/user/login")
+    public Result login(@RequestBody Map<String,String> body) throws Exception {
+        System.out.println(body.toString());
+        return Result.genSuccessResult();
+    }
 
 }
