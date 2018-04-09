@@ -19,6 +19,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.ServletException;
@@ -135,4 +136,13 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
         return ip;
     }
+
+        @Override
+        public void addViewControllers(ViewControllerRegistry registry) {
+            registry.addViewController("/home").setViewName("home");
+            registry.addViewController("/").setViewName("home");
+            registry.addViewController("/hello").setViewName("hello");
+            registry.addViewController("/login").setViewName("login");
+        }
+
 }

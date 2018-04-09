@@ -24,13 +24,19 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-            .authorizeRequests()
-                .antMatchers("/").permitAll()
+           .authorizeRequests()
+                .antMatchers("/", "/home").permitAll()
                 .anyRequest().authenticated()
-
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+            .logout()
+                .permitAll()
                 // if Spring MVC is on classpath and no CorsConfigurationSource is provided,
                 // Spring Security will use CORS configuration provided to Spring MVC
-                .and().cors();
+            .and().cors();
         // @formatter:on
     }
 
