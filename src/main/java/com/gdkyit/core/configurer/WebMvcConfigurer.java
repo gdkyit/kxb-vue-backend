@@ -29,6 +29,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Spring MVC 配置
  */
@@ -57,7 +58,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
 
     //统一异常处理
-    @Override
+ /*   @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
         exceptionResolvers.add(new HandlerExceptionResolver() {
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
@@ -90,7 +91,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
         });
     }
-
+*/
     //解决跨域问题
     @Override
     public void addCorsMappings(CorsRegistry registry) {
